@@ -6,13 +6,13 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 18:56:03 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/12/25 18:42:50 by zajaddad         ###   ########.fr       */
+/*   Updated: 2024/12/26 17:49:43 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
 
-void	unix_error(char *msg)
+static void	unix_error(char *msg)
 {
 	ft_printf("Error: %s\n", msg);
 	exit(EXIT_FAILURE);
@@ -54,6 +54,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 		return (EXIT_FAILURE);
+        // TODO: Check server pid if valid
 	serverpid = atoi(argv[1]);
 	buffer = argv[2];
 	send_buffer(serverpid, buffer);

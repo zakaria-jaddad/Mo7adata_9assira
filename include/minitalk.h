@@ -6,7 +6,7 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 18:47:58 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/12/25 18:38:11 by zajaddad         ###   ########.fr       */
+/*   Updated: 2024/12/26 17:30:18 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ typedef struct s_siginfo
 	unsigned int	counter;
 	int			c;
 }					t_siginfo;
+
 #endif
