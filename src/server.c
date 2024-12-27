@@ -6,7 +6,7 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 18:47:55 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/12/26 17:55:31 by zajaddad         ###   ########.fr       */
+/*   Updated: 2024/12/27 00:45:30 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,48 +16,44 @@
 #include <stdio.h>
 #include <unistd.h>
 
-static t_siginfo	g_siginfo = {.counter = 0, .c = 0};
-
-
-void signal_handler(int signal, siginfo_t *signal_info, void *template)
+void	signal_handler(int signal, siginfo_t *signal_info, void *template)
 {
-        ft_printf("caught signal %d\n", signal);
-        (void) signal_info;
-        (void) template;
-        // received 0
-        if (signal == SIGUSR1)
-                g_siginfo.c = g_siginfo.c << 1;
-        // received 1
-        else
-                g_siginfo.c = (g_siginfo.c << 1) & 1;
-        g_siginfo.counter++;
-        if (g_siginfo.counter == 8)
-        {
-                ft_printf("%c", g_siginfo.c);
-                g_siginfo.c = 0;
-                g_siginfo.counter = 0;
-        }
+	static t_siguserinfo	g_siguserinfo;
+
+	(void)signal_info;
+	(void)template;
+	if (signal != SIGUSR1 && signal != SIGUSR2)
+		return ;
+	// received 0
+	if (signal == SIGUSR1)
+		g_siguserinfo.c = g_siguserinfo.c << 1;
+	// received 1
+	else
+		g_siguserinfo.c = (g_siguserinfo.c << 1) | 1;
+	g_siguserinfo.counter++;
+	if (g_siguserinfo.counter == 8)
+	{
+		ft_printf("%c", g_siguserinfo.c);
+		g_siguserinfo.c = 0;
+		g_siguserinfo.counter = 0;
+	}
 }
 
-
-int main(void)
+int	main(void)
 {
-        struct sigaction sa; 
+	struct sigaction	sa;
+	pid_t				pid;
 
-
-        sa.sa_sigaction = &signal_handler;
-
-        sigemptyset(&sa.sa_mask); // what this does ?
-
-
-        sa.sa_flags = SA_SIGINFO;
-
-        sigaction(SIGUSR1, &sa, NULL);
-        sigaction(SIGUSR2, &sa, NULL);
-
-        pid_t pid = getpid();
-        ft_printf("Server PID: %d", pid);
-        while (1)
-                pause();
-        return EXIT_SUCCESS;
+	sa.sa_sigaction = signal_handler;
+	sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&sa.sa_mask);
+	if (sigaction(SIGUSR1, &sa, NULL) == -1)
+		unix_error("Can´t handle SIGUSR1");
+	if (sigaction(SIGUSR2, &sa, NULL) == -1)
+		unix_error("Can´t handle SIGUSR2");
+	pid = getpid();
+	ft_printf("Server PID: %d", pid);
+	while (1)
+		pause();
+	return (EXIT_SUCCESS);
 }

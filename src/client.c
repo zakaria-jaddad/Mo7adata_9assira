@@ -6,17 +6,13 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 18:56:03 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/12/26 17:49:43 by zajaddad         ###   ########.fr       */
+/*   Updated: 2024/12/27 00:59:00 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
+#include <unistd.h>
 
-static void	unix_error(char *msg)
-{
-	ft_printf("Error: %s\n", msg);
-	exit(EXIT_FAILURE);
-}
 
 void	send_bits(pid_t serverpid, char c)
 {
@@ -35,6 +31,7 @@ void	send_bits(pid_t serverpid, char c)
 			if (kill(serverpid, SIGUSR1) == -1)
 				unix_error("Kill error");
 		}
+                usleep(300);
 		i = i >> 1;
 	}
 }
