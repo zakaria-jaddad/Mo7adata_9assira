@@ -6,12 +6,12 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 18:47:55 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/12/27 00:45:30 by zajaddad         ###   ########.fr       */
+/*   Updated: 2024/12/27 22:35:53 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
-#include <bits/types/siginfo_t.h>
+/* #include <bits/types/siginfo_t.h> */
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -22,6 +22,11 @@ void	signal_handler(int signal, siginfo_t *signal_info, void *template)
 
 	(void)signal_info;
 	(void)template;
+	/* if (g_siguserinfo.is_client_currepted != 0) */
+	/* { */
+	/* 	ft_memset(&g_siguserinfo, 0, sizeof(struct s_siguserinfo)); */
+	/* 	printf("client was currepted\n"); */
+	/* } */
 	if (signal != SIGUSR1 && signal != SIGUSR2)
 		return ;
 	// received 0
