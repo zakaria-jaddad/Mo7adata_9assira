@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/24 18:56:03 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/12/29 18:42:04 by zajaddad         ###   ########.fr       */
+/*   Created: 2024/12/29 18:41:27 by zajaddad          #+#    #+#             */
+/*   Updated: 2024/12/29 19:45:28 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
-#include <signal.h>
-#include <stdio.h>
-#include <sys/signal.h>
-#include <unistd.h>
 
 void	send_bits(pid_t serverpid, char c)
 {
@@ -44,13 +40,13 @@ void	send_buffer(pid_t serverpid, char *buffer)
 		return ;
 	while (*buffer)
 		send_bits(serverpid, *buffer++);
+	ft_printf("Message Sent Successfully\n");
 }
 
 int	main(int argc, char **argv)
 {
 	pid_t	serverpid;
 	char	*buffer;
-
 	if (argc != 3)
 		unix_error("./prog PID \"string\"");
 	buffer = argv[2];

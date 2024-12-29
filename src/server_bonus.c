@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/24 18:47:55 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/12/29 18:22:03 by zajaddad         ###   ########.fr       */
+/*   Created: 2024/12/29 18:42:48 by zajaddad          #+#    #+#             */
+/*   Updated: 2024/12/29 19:44:21 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
 
 void	signal_handler(int signal, siginfo_t *signal_info, void *template)
 {
@@ -43,7 +40,6 @@ void	signal_handler(int signal, siginfo_t *signal_info, void *template)
 int	main(void)
 {
 	struct sigaction	sa;
-	pid_t				pid;
 
 	sa.sa_sigaction = signal_handler;
 	sa.sa_flags = SA_SIGINFO;
@@ -52,8 +48,7 @@ int	main(void)
 		unix_error("Can´t handle SIGUSR1");
 	if (sigaction(SIGUSR2, &sa, NULL) == -1)
 		unix_error("Can´t handle SIGUSR2");
-	pid = getpid();
-	ft_printf("Server PID: %d", pid);
+	ft_printf("Server PID: %d", getpid());
 	while (1)
 		pause();
 	return (EXIT_SUCCESS);
