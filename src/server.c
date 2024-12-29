@@ -6,14 +6,11 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 18:47:55 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/12/29 18:22:03 by zajaddad         ###   ########.fr       */
+/*   Updated: 2024/12/30 00:18:45 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
 
 void	signal_handler(int signal, siginfo_t *signal_info, void *template)
 {
@@ -53,7 +50,7 @@ int	main(void)
 	if (sigaction(SIGUSR2, &sa, NULL) == -1)
 		unix_error("Can´t handle SIGUSR2");
 	pid = getpid();
-	ft_printf("Server PID: %d", pid);
+	ft_printf("Server PID: %d\n", pid);
 	while (1)
 		pause();
 	return (EXIT_SUCCESS);

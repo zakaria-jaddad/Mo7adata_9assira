@@ -6,7 +6,7 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 18:56:03 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/12/29 18:42:04 by zajaddad         ###   ########.fr       */
+/*   Updated: 2024/12/29 23:47:10 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,31 @@ void	send_buffer(pid_t serverpid, char *buffer)
 		send_bits(serverpid, *buffer++);
 }
 
+int check_pid(char *s)
+{
+  if (s == NULL)
+    return 0;
+  while (*s)
+  {
+    if (!ft_isdigit(*s++)) 
+      return 0;
+  }
+  return 1;
+}
+
 int	main(int argc, char **argv)
 {
 	pid_t	serverpid;
 	char	*buffer;
-
 	if (argc != 3)
-		unix_error("./prog PID \"string\"");
+		unix_error("./prog <PID> \"string\"");
 	buffer = argv[2];
+  if (!check_pid(argv[1]))
+		unix_error("Invalid PID");
 	serverpid = ft_atoi(argv[1]);
 	if (serverpid < 1)
 		unix_error("Invalid PID");
 	send_buffer(serverpid, buffer);
 	return (0);
 }
+
