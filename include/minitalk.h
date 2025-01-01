@@ -6,15 +6,15 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:26:57 by zajaddad          #+#    #+#             */
-/*   Updated: 2025/01/01 15:36:45 by zajaddad         ###   ########.fr       */
+/*   Updated: 2025/01/01 23:05:18 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 # define MINITALK_H
 
-# include "../ft_printf/ft_printf.h"
-# include "../libft/libft.h"
+# include "../lib/ft_printf/ft_printf.h"
+# include "../lib/libft/libft.h"
 # include <signal.h>
 # include <stdlib.h>
 # include <unistd.h>
