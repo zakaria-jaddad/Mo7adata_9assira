@@ -5,22 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/12/29 18:43:50 by zajaddad          #+#    #+#              #
-#    Updated: 2024/12/29 18:44:05 by zajaddad         ###   ########.fr        #
+#    Created: 2025/01/01 15:39:28 by zajaddad          #+#    #+#              #
+#    Updated: 2025/01/01 15:39:29 by zajaddad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
 SRC = src
-
 CFLAGS = -Wall -Werror -Wextra
 INCLUDE = include/minitalk.h
-
 MAKE = make
-
-
 CC = cc
-
 PRINTF = ft_printf
 LIBFT = libft
 
@@ -33,16 +27,16 @@ bonus: libftprintf libft
 	$(CC) $(CFLAGS) $(SRC)/server_bonus.c -lftprintf -L./ft_printf/ -lft -L./libft/ -o server_bonus
 
 libftprintf: 
-	$(MAKE) -s -C $(PRINTF)
+	$(MAKE) -C $(PRINTF)
 
 libft: 
-	$(MAKE) -s -C $(LIBFT)
+	$(MAKE) -C $(LIBFT)
 
 libftprintf_fclean: 
-	$(MAKE) -s -C  $(PRINTF) fclean
+	$(MAKE) -C $(PRINTF) fclean
 
 libft_fclean: 
-	$(MAKE) -s -C  $(LIBFT) fclean
+	$(MAKE) -C $(LIBFT) fclean
 
 fclean: clean libftprintf_fclean libft_fclean
 

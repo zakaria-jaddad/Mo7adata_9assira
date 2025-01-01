@@ -6,7 +6,7 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 18:42:48 by zajaddad          #+#    #+#             */
-/*   Updated: 2024/12/30 00:18:24 by zajaddad         ###   ########.fr       */
+/*   Updated: 2025/01/01 15:28:14 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	signal_handler(int signal, siginfo_t *signal_info, void *template)
 {
 	static t_siguserinfo	siguserinfo;
 
-	(void)signal_info;
 	(void)template;
 	if (!siguserinfo.pid)
 		siguserinfo.pid = signal_info->si_pid;
@@ -32,9 +31,9 @@ void	signal_handler(int signal, siginfo_t *signal_info, void *template)
 	if (siguserinfo.counter == 8)
 	{
 		ft_printf("%c", siguserinfo.c);
-    if (siguserinfo.c == '\0')
-      if (kill(signal_info->si_pid, SIGUSR2) == -1)
-        unix_error("Unable To Send Aknowledgement To Client\n");
+		if (siguserinfo.c == '\0')
+			if (kill(signal_info->si_pid, SIGUSR2) == -1)
+				unix_error("Unable To Send Aknowledgement To Client\n");
 		siguserinfo.c = 0;
 		siguserinfo.counter = 0;
 	}
