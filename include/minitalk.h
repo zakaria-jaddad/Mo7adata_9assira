@@ -6,7 +6,7 @@
 /*   By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:26:57 by zajaddad          #+#    #+#             */
-/*   Updated: 2025/01/01 23:05:18 by zajaddad         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:35:09 by zajaddad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 
 typedef struct s_siguserinfo
 {
+	int				byte_counter;
+	unsigned char	utf8_string[5];
+	int				byte_index;
 	unsigned int	counter;
 	int				c;
 	pid_t			pid;

@@ -6,7 +6,7 @@
 #    By: zajaddad <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 15:39:28 by zajaddad          #+#    #+#              #
-#    Updated: 2025/01/01 23:04:20 by zajaddad         ###   ########.fr        #
+#    Updated: 2025/01/02 18:40:05 by zajaddad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ LIBFT = $(LIB)/libft
 OBJS = server.o
 OBJC = client.o
 
-BONUS_OBJS = bonus_server.o
-BONUS_OBJC = bonus_client.o
+BONUS_OBJS = server_bonus.o
+BONUS_OBJC = client_bonus.o
 
 all: libftprintf libft server client
 
@@ -40,12 +40,10 @@ client: $(OBJC)
 	$(CC) $(CFLAGS) $(OBJC) -lftprintf -L$(LIB)/ft_printf/ -lft -L$(LIB)/libft/ -o client 
 
 server_bonus: $(BONUS_OBJS)
-	$(CC) $(CFLAGS) $(BONUS_OBJC) -lftprintf -L$(LIB)/ft_printf/ -lft -L$(LIB)/libft/ -o server_bonus
+	$(CC) $(CFLAGS) $(BONUS_OBJS) -lftprintf -L$(LIB)/ft_printf/ -lft -L$(LIB)/libft/ -o server_bonus
 
 client_bonus: $(BONUS_OBJC)
 	$(CC) $(CFLAGS) $(BONUS_OBJC) -lftprintf -L$(LIB)/ft_printf/ -lft -L$(LIB)/libft/ -o client_bonus
-
-
 
 libftprintf: 
 	$(MAKE) -C $(PRINTF)
@@ -60,12 +58,12 @@ libft_fclean:
 	$(MAKE) -C $(LIBFT) fclean
 
 fclean: clean libftprintf_fclean libft_fclean
-
-clean: 
 	rm -f client server
 	rm -f client_bonus server_bonus
+
+clean: 
 	rm -f $(OBJC) $(OBJS)
-	rm -f $(BONUS_OBJS) $(BONUS_OBJS)
+	rm -f $(BONUS_OBJC) $(BONUS_OBJS)
 
 re: fclean all
 
